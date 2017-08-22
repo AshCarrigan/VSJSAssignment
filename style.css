@@ -1,0 +1,65 @@
+﻿body {
+    background: url('https://static.pexels.com/photos/8264/pexels-photo.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+p {
+    margin: 30px 30px 30px 30px;
+}
+form {
+    width: 100%;
+}
+.button {
+    color: red;
+}
+
+#title-heading {
+    text-align: center;
+}
+
+.jumbotron {
+    opacity: 0.85;
+    width: 60%;
+    float: right;
+    margin: 20px;
+    border: 3px solid #EEDC38;
+}
+
+.displaybox {
+    border: 3px solid #EEDC38;
+}
+
+#form-input {
+    margin: 20px 20px 20px 20px;
+}
+
+#search-inp {
+    margin: 20px 20px 20px 20px;
+}
+
+#res-inp {
+    margin: 20px 20px 20px 20px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#input-table {
+    background-color: white;
+    opacity: 0.85;
+    border: 3px solid #EEDC38;
+    width: 95%;
+    height: 100%;
+    margin: 30px 30px 30px 30px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#main-table {
+    background-color: white;
+    opacity: 0.85;
+}
+
+#btn-success {
+    color: #3678C8;
+}

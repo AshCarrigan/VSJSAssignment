@@ -1,16 +1,157 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset ="utf-8" />
-    <title>Library</title>
-</head>
-
-<script type="text/javascript" src="app.js"></script>
-<div id="result"></div>
-<button="This is Text"></button>
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <title>Library Project</title>
+      <link rel="stylesheet" href="bootstrap.css">
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  </head>
 <body>
-    <h2>Library Project</h2>
+    <!--Navigation Bar-->
+    <div class="container wrapper">
+        <nav class-="" "navbar=" " navbar-inverse="" navbar-fixed-top"="">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-="" controls="navbar">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">LIBRARY PROJECT</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Email" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" placeholder="Password" type="password">
+                        </div>
+                        <button class="btn btn-success" type="submit">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="main-content container">
+        <div class="row">
+            <div class="jumbotron col-md-12">
+                <h1 id="title-heading">Not your mother's library...</h1>
+                <p>
+                    This is a library built for you. It includes a large callout called a jumbotron and supporting pieces of content to add and remove books as you see fit. Use it as a starting point to create your own personal library.
+                </p>
+                <div class="container">
+                    <label>Search Catalog:</label>
+                    <input class="form-control displaybox" id="search-inp" placeholder="Search Here" type="text">
+                </div>
+                <div class="container">
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary get-tit-btn">Get Title</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary get-auth-btn">Get Author</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary get-auths">Get Auths.</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary rand-book">Random Book</button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary rand-auth">Random Author</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <label>Search Results:</label>
+                    <table class="table table-hover">
+                            <tr>
+                                <th> Title</th>
+                                <th> Author</th>
+                                <th> Number of Pages</th>
+                                <th> Publish Date</th>
+                            </tr>
+                        <tbody id="res-inp"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2>My Catalog:</h2>
+        <table class="table" id="main-table">
+                <tr>
+                    <th> Title</th>
+                    <th> Author</th>
+                    <th> Number of Pages</th>
+                    <th> Publish Date</th>
+                </tr>
+            <tbody id="input-table"></tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div class="form-group row">
+            <div class="col-md-3">
+                <label for="title-input">Title</label>
+                <input class="form-control displaybox" id="title-input" placeholder="Type Title Here" type="text">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary add-book-btn">Add Title</button>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary rem-book-tit-btn">Remove Title</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="author-input">Author</label>
+                <input class="form-control displaybox" id="author-input" placeholder="Type Author Here" type="text">
+                <div class="btn-group btn-group-justified">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary rem-book-auth-btn">Remove Author</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label for="page-input">Number of Pages</label>
+                <input class="form-control displaybox" id="page-input" placeholder="Type Pages Here" type="text">
+            </div>
+            <div class="col-md-3">
+                <label for="date-input">Date Published</label>
+                <input class="form-control displaybox" id="date-input" placeholder="Type Publish Date Here" type="text">
+            </div>
+        </div>
+        <!--Add Books-->
+        <div class="form-group row">
+            <ul class="add-books-ul">
+                <div class="col-md-12">
+                    <li>
+                        <input><input><input><input>
+                    </li>
+                </div>
+                <li>
+                    <form><input><input><input><input></form>
+                </li>
+                <li>
+                    <form><input><input><input><input></form>
+                </li>
+            </ul>
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary id=" add-books="" "=" ">Add Books</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    <p>
+    2017 My Library, Inc.
+    </p>
+    </footer>
+    <script src="./JS/jquery-3.2.1.js "></script>
+    <script src="./JS/app.js "></script>
 </body>
-
 </html>
