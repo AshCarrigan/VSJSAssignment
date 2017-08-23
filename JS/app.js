@@ -5,7 +5,7 @@ var Library = function(newInstance) {
 };
 
 Library.prototype.init = function() {
-  //  localStorage.clear();
+  localStorage.clear();
   this._populateBooks();
   this._bindEvents();
 };
@@ -22,7 +22,7 @@ Library.prototype._bindEvents = function() {
   $("button.rand-book").on("click", $.proxy(this._handleGetRandBook, this));
   $("button.get-tit-btn").on("click", $.proxy(this._handleGetBookByTit, this));
   $("button.get-auth-btn").on("click", $.proxy(this._handleGetBooksByAuth, this));
-  $("#add-books").on("click", $.proxy(this._handleAddBooks, this));
+  $("button.add-books-btn").on("click", $.proxy(this._handleAddBooks, this));
   $("button.get-auths").on("click", $.proxy(this._handleGetAuths, this));
   $("button.rand-auth").on("click", $.proxy(this._handleGetRandAuths, this));
 };
@@ -63,7 +63,7 @@ Library.prototype._handleGetRandBook = function() {
 
 Library.prototype._handleGetBookByTit = function() {
   var title = $("#search-inp").val();
-  var find = gLib.getBookByTitle(title);
+  var find = this.getBookByTitle(title);
   $("#res-inp").empty();
   $.each(find, function(index, value) {
     $("#res-inp").append(
@@ -80,7 +80,7 @@ Library.prototype._handleGetBookByTit = function() {
 
 Library.prototype._handleGetBooksByAuth = function() {
   var authorName = $("#search-inp").val();
-  var find = gLib.getBooksByAuthor(authorName);
+  var find = this.getBooksByAuthor(authorName);
   $("#res-inp").empty();
   $.each(find, function(index, value) {
     $("#res-inp").append(
@@ -105,20 +105,20 @@ Library.prototype._handleAddBook = function(oArgs) {
 };
 
 Library.prototype._handleAddBooks = function(newBookArr) {
-  window.newBookArr = [];
+  newBookArr = [];
   $("ul.add-books-ul li").each(function() {
     var newBookObj = buildBookObj($(this));
-    window.newBookArr.push(newBookObj);
+    newBookArr.push(newBookObj);
   });
 
-  this.addBooks(window.newBookArr);
+  this.addBooks(newBookArr);
 }
 
 function buildBookObj(jLi) {
   return {
     title: $(jLi).find("input:nth-child(1)").val(),
     authorName: $(jLi).find("input:nth-child(2)").val(),
-    page: $(jLi).find("input:nth-child(3)").val(),
+    numPages: $(jLi).find("input:nth-child(3)").val(),
     date: $(jLi).find("input:nth-child(4)").val(),
   };
 };
@@ -285,73 +285,73 @@ window.gBookOne = new Book({
   authorName: "Hunter S. Thompson",
   numPages: 240,
   date: "10/01/2007"
-})
+});
 window.gBookTwo = new Book({
   title: "On the Road",
   authorName: "Jack Kerouac",
   numPages: 320,
   date: "10/05/1957"
-})
+});
 window.gBookThree = new Book({
   title: "A Farewell to Arms",
   authorName: "Ernest Hemingway",
   numPages: 355,
   date: "05/07/1929"
-})
+});
 window.gBookFour = new Book({
   title: "The Alchemist",
   authorName: "Paolo Coelho",
   numPages: 208,
   date: "06/29/1988"
-})
+});
 window.gBookFive = new Book({
   title: "Fight Club",
   authorName: "Chuck Palahniuk",
   numPages: 208,
   date: "08/17/1996"
-})
+});
 window.gBookSix = new Book({
   title: "Walden",
   authorName: "Henry Thoreau",
   numPages: 221,
   date: "06/01/1942"
-})
+});
 window.gBookSeven = new Book({
   title: "The Road",
   authorName: "Cormac McCarthy",
   numPages: 287,
   date: "09/26/2006"
-})
+});
 window.gBookEight = new Book({
   title: "Blue Like Jazz",
   authorName: "Donald Miller",
   numPages: 242,
   date: "10/23/2003"
-})
+});
 window.gBookNine = new Book({
   title: "Atlas Shrugged",
   authorName: "Ann Rand",
   numPages: 1168,
   date: "10/10/1957"
-})
+});
 window.gBookTen = new Book({
   title: "Zen and the Art of Motorcycle Maintenance",
   authorName: "Robert Pirsig",
   numPages: 418,
   date: "12/10/1974"
-})
+});
 window.gBookEleven = new Book({
   title: "The Catcher in the Rye",
   authorName: "J.D. Salinger",
   numPages: 214,
   date: "05/19/1945"
-})
+});
 window.gBookTwelve = new Book({
   title: "Let My People Go Surfing",
   authorName: "Yvon Chouinard",
   numPages: 259,
   date: "06/15/2005"
-})
+});
 
 Library.prototype.setStorage = function() {
   if (typeof(Storage) !== "undefined") {
@@ -363,5 +363,4 @@ Library.prototype.setStorage = function() {
 
 $(document).ready(function() {
   window.gLib.init();
-
 });
