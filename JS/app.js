@@ -5,8 +5,7 @@ var Library = function(newInstance) {
 };
 
 Library.prototype.init = function() {
-  localStorage.clear();
-  this._populateBooks();
+  this._checkLocalStorage();
   this._bindEvents();
 };
 
@@ -28,7 +27,8 @@ Library.prototype._bindEvents = function() {
 };
 
 Library.prototype._checkLocalStorage = function() {
-  if (typeof(Storage) !== "undefined") {
+ if (this.myBookArr.length == 0) {
+  this._populateBooks();
     return JSON.parse(localStorage.getItem("myBookArr"));
   } else {
     return false;
@@ -48,9 +48,8 @@ Library.prototype._handleRemBookAuth = function() {
 
 Library.prototype._handleGetRandBook = function() {
   var randomBook = this.getRandomBook();
-  console.log(randomBook);
-  $("#res-inp").empty()
-  $("#res-inp").append(
+  $("#search-result-display").empty()
+  $("#search-result-display").append(
     "<tr>",
     "<td>" + randomBook.title + "</td>",
     "<td>" + randomBook.authorName + "</td>",
@@ -62,11 +61,11 @@ Library.prototype._handleGetRandBook = function() {
 };
 
 Library.prototype._handleGetBookByTit = function() {
-  var title = $("#search-inp").val();
+  var title = $("#search-text-input").val();
   var find = this.getBookByTitle(title);
-  $("#res-inp").empty();
+  $("#search-result-display").empty();
   $.each(find, function(index, value) {
-    $("#res-inp").append(
+    $("#search-result-display").append(
       "<tr>",
       "<td>" + value.title + "</td>",
       "<td>" + value.authorName + "</td>",
@@ -79,11 +78,11 @@ Library.prototype._handleGetBookByTit = function() {
 };
 
 Library.prototype._handleGetBooksByAuth = function() {
-  var authorName = $("#search-inp").val();
+  var authorName = $("#search-text-input").val();
   var find = this.getBooksByAuthor(authorName);
-  $("#res-inp").empty();
+  $("#search-result-display").empty();
   $.each(find, function(index, value) {
-    $("#res-inp").append(
+    $("#search-result-display").append(
       "<tr>",
       "<td>" + value.title + "</td>",
       "<td>" + value.authorName + "</td>",
@@ -102,6 +101,7 @@ Library.prototype._handleAddBook = function(oArgs) {
   newBook.numPages = $("#page-input").val();
   newBook.date = $("#date-input").val();
   this.addBook(newBook);
+  $("input").val("");
 };
 
 Library.prototype._handleAddBooks = function(newBookArr) {
@@ -109,6 +109,7 @@ Library.prototype._handleAddBooks = function(newBookArr) {
   $("ul.add-books-ul li").each(function() {
     var newBookObj = buildBookObj($(this));
     newBookArr.push(newBookObj);
+    $("input").val("");
   });
 
   this.addBooks(newBookArr);
@@ -125,8 +126,8 @@ function buildBookObj(jLi) {
 
 Library.prototype._handleGetAuths = function() {
   var getAuths = this.getAuthors();
-  $("#res-inp").empty();
-  $("#res-inp").append(
+  $("#search-result-display").empty();
+  $("#search-result-display").append(
     "<tr>",
     "<td>" + "</td>",
     "<td>" + getAuths + "</td>",
@@ -139,8 +140,8 @@ Library.prototype._handleGetAuths = function() {
 
 Library.prototype._handleGetRandAuths = function() {
   var randomAuth = this.getRandomAuthorName();
-  $("#res-inp").empty();
-  $("#res-inp").append(
+  $("#search-result-display").empty();
+  $("#search-result-display").append(
     "<tr>",
     "<td>" + "</td>",
     "<td>" + randomAuth.authorName + "</td>",
@@ -150,9 +151,6 @@ Library.prototype._handleGetRandAuths = function() {
   ).css('color', '#5B3285');
   return true;
 };
-
-
-window.gLib = new Library();
 
 Library.prototype.stageLibrary = function() {
   $("#input-table").empty();
@@ -172,26 +170,23 @@ Library.prototype.stageLibrary = function() {
 Library.prototype.addBook = function(book) {
   for (i = 0; i < this.myBookArr.length; i++) {
     if (this.myBookArr[i].title === book.title) {
-      //alert(this.myBookArr[i].title +" has not been successfully added to the library because it already exists.");
       return false;
     }
   }
   this.myBookArr.push(book);
-  //alert(this.myBookArr[i].title + " has been successfully added to the library.");
   this.setStorage();
   this.stageLibrary();
-  console.log(book.title + " has been added");
   return true;
 };
 
 Library.prototype.removeBookByTitle = function(title) {
   for (i = 0; i < this.myBookArr.length; i++) {
-    if (this.myBookArr[i].title.toLowerCase().indexOf(title.toLowerCase()) > -1 && title) { //title.toLowerCase.indexOf(title.toLowerCase()) > -1 && title) {
+    if (this.myBookArr[i].title.toLowerCase().indexOf(title.toLowerCase()) > -1 && title) {
       this.myBookArr.splice(i, 1);
       alert(title + " has been removed from the library.");
       this.setStorage();
-      console.log(title + " has been removed");
       this.stageLibrary();
+      $("input").val("");
       return true;
     }
   }
@@ -200,17 +195,16 @@ Library.prototype.removeBookByTitle = function(title) {
 };
 
 Library.prototype.removeBookByAuthor = function(authorName) {
-  var check = false;
   for (i = 0; i < this.myBookArr.length; i++) {
     if (this.myBookArr[i].authorName.toLowerCase().indexOf(authorName.toLowerCase()) > -1 && authorName) {
       this.myBookArr.splice(i, 1);
-      check = true;
       alert(authorName + " has been removed as an author from the library.");
-      console.log(authorName + " has been removed");
       this.setStorage();
       this.stageLibrary();
+      $("input").val("");
+      }
     }
-  }
+ 
   //    alert(authorName + " does not match any authors in the library.");
   return false;
 };
@@ -225,6 +219,7 @@ Library.prototype.getBookByTitle = function(title) {
   for (i = 0; i < this.myBookArr.length; i++) {
     if (this.myBookArr[i].title.toLowerCase().indexOf(title.toLowerCase()) > -1 && title) {
       selection.push(this.myBookArr[i]);
+      $("#search-text-input").val("");
     }
   }
   return selection;
@@ -235,6 +230,8 @@ Library.prototype.getBooksByAuthor = function(authorName) {
   for (i = 0; i < this.myBookArr.length; i++) {
     if (this.myBookArr[i].authorName.toLowerCase().indexOf(authorName.toLowerCase()) > -1 && authorName) {
       selection.push(this.myBookArr[i]);
+      $("#search-text-input").val("");
+
     }
   }
   return selection;
@@ -257,11 +254,11 @@ Library.prototype.getAuthors = function() {
     loop1: {
       for (x = 0; x < authorNameArr.length; x++) {
         if (this.myBookArr[i].authorName === authorNameArr[x]) {
-          console.log(this.myBookArr[i].authorName);
           break loop1;
         }
       }
       authorNameArr.push(this.myBookArr[i].authorName);
+      $("#search-text-input").val("");
     }
   return authorNameArr;
 };
@@ -269,7 +266,6 @@ Library.prototype.getAuthors = function() {
 Library.prototype.getRandomAuthorName = function() {
   var length = this.myBookArr.length;
   return length > 0 ? this.myBookArr[Math.floor(Math.random() * length)] : null;
-
 };
 
 var Book = function(oArgs) {
@@ -362,5 +358,6 @@ Library.prototype.setStorage = function() {
 };
 
 $(document).ready(function() {
+  window.gLib = new Library();
   window.gLib.init();
 });

@@ -9,15 +9,21 @@
 p {
     margin: 30px 30px 30px 30px;
 }
+
+ul {
+    list-style-type: none;
+}
+
 form {
     width: 100%;
 }
-.button {
-    color: red;
+
+input:invalid {
+    border: 2px solid red;
 }
 
-#title-heading {
-    text-align: center;
+input:valid {
+    border: 2px solid #EEDC38;
 }
 
 .jumbotron {
@@ -30,6 +36,10 @@ form {
 
 .displaybox {
     border: 3px solid #EEDC38;
+}
+
+#title-heading {
+    text-align: center;
 }
 
 #form-input {
@@ -60,6 +70,6 @@ form {
     opacity: 0.85;
 }
 
-#btn-success {
-    color: #3678C8;
+#search-container {
+    padding: 20px;
 }

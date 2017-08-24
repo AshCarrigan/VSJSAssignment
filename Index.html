@@ -19,7 +19,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">LIBRARY PROJECT</a>
+                    <a class="navbar-brand" href="javascript:(void)">LIBRARY PROJECT</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right">
@@ -35,6 +35,7 @@
             </div>
         </nav>
     </div>
+    <!--Main Container Top Right-->
     <div class="main-content container">
         <div class="row">
             <div class="jumbotron col-md-12">
@@ -44,7 +45,7 @@
                 </p>
                 <div class="container">
                     <label>Search Catalog:</label>
-                    <input class="form-control displaybox" id="search-inp" placeholder="Search Here" type="text">
+                    <input class="form-control displaybox" id="search-text-input" placeholder="Search by Author or Title Here" type="text">
                 </div>
                 <div class="container">
                     <div class="btn-group btn-group-justified">
@@ -65,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="container">
+                <div class="container" id="search-container">
                     <label>Search Results:</label>
                     <table class="table table-hover">
                             <tr>
@@ -74,7 +75,7 @@
                                 <th> Number of Pages</th>
                                 <th> Publish Date</th>
                             </tr>
-                        <tbody id="res-inp"></tbody>
+                        <tbody id="search-result-display"></tbody>
                     </table>
                 </div>
             </div>
@@ -93,11 +94,12 @@
         </table>
     </div>
     <div class="container">
+        <label>Add Individual Books Here:</label>
         <div class="form-group row">
             <div class="col-md-3">
                 <label for="title-input">Title</label>
                 <input class="form-control displaybox" id="title-input" placeholder="Type Title Here" type="text">
-                <div class="btn-group btn-group-justified">
+                <div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary add-book-btn">Add Title</button>
                     </div>
@@ -109,7 +111,7 @@
             <div class="col-md-3">
                 <label for="author-input">Author</label>
                 <input class="form-control displaybox" id="author-input" placeholder="Type Author Here" type="text">
-                <div class="btn-group btn-group-justified">
+                <div>
                     <div class="btn-group">
                         <button type="button" class="btn btn-primary rem-book-auth-btn">Remove Author</button>
                     </div>
@@ -117,11 +119,11 @@
             </div>
             <div class="col-md-3">
                 <label for="page-input">Number of Pages</label>
-                <input class="form-control displaybox" id="page-input" placeholder="Type Pages Here" type="text">
+                <input class="form-control displaybox" id="page-input" placeholder="Type Pages Here" type="number" min="1" max="10000">
             </div>
             <div class="col-md-3">
                 <label for="date-input">Date Published</label>
-                <input class="form-control displaybox" id="date-input" placeholder="Type Publish Date Here" type="text">
+                <input class="form-control displaybox" id="date-input" placeholder="Type Publish Date Here" type=number>
             </div>
         </div>
         <!--Add Books-->
@@ -129,14 +131,20 @@
         <div class="form-group row">
             <ul class="add-books-ul">
               <li>
-                <input class="displaybox" placeholder="Type Title Here"><input class="displaybox" placeholder="Type Author Here"><input class="displaybox" placeholder="Type Pages Here"><input class="displaybox" placeholder="Type Date Here">
+                  <input class="form-control displaybox" placeholder="Type Title Here">
+                  <input class="form-control displaybox" placeholder="Type Author Here">
+                  <input class="form-control displaybox" type="number" min="1" max="10000" placeholder="Type Pages Here">
+                  <input class="form-control displaybox" placeholder="Type Date Here">
               </li>
                 <br />
               <li>
-                <input class="displaybox" placeholder="Type Title Here"><input class="displaybox" placeholder="Type Author Here"><input class="displaybox" placeholder="Type Pages Here"><input class="displaybox" placeholder="Type Date Here">
+                  <input class="form-control displaybox" placeholder="Type Title Here">
+                  <input class="form-control displaybox" placeholder="Type Author Here">
+                  <input class="form-control displaybox" type="number" min="1" max="10000" placeholder="Type Pages Here">
+                  <input class="form-control displaybox" placeholder="Type Date Here">
               </li>
             </ul>
-            <div class="btn-group btn-group-justified">
+            <div>
               <div class="btn-group">
                 <button type="button" class="btn btn-primary add-books-btn">Add Books</button>
               </div>
